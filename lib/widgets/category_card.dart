@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:news_now/constants.dart';
+import 'package:news_now/models/category_model.dart';
 
 class CategoryCard extends StatelessWidget {
 
-  final String catImage, catName;
+  final CategoryModel category;
 
-  const CategoryCard({super.key, required this.catImage, required this.catName});
+  const CategoryCard({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +24,12 @@ class CategoryCard extends StatelessWidget {
             )
           ],
           image: DecorationImage(
-              image: AssetImage(catImage), fit: BoxFit.cover),
+              image: AssetImage(category.cateoryImage), fit: BoxFit.cover),
           color: kmainColor,
           borderRadius: BorderRadius.circular(10)),
       child: Center(
           child: Text(
-        catName,
+        category.categoryName,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 16,

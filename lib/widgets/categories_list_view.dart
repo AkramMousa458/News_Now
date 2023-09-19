@@ -4,7 +4,7 @@ import 'package:news_now/widgets/category_card.dart';
 
 class CategoriesListView extends StatelessWidget {
 
- final List<CategoryModel> categories = [
+ final List<CategoryModel> categories = const [
     CategoryModel(cateoryImage: 'assets/business.jpeg', categoryName: 'Bussiness'),
     CategoryModel(cateoryImage: 'assets/entertainment.jpeg', categoryName: 'Entertaiment'),
     CategoryModel(cateoryImage: 'assets/general.avif', categoryName: 'General'),
@@ -14,7 +14,7 @@ class CategoriesListView extends StatelessWidget {
     CategoryModel(cateoryImage: 'assets/technology.jpeg', categoryName: 'Technology')
   ];
 
-  CategoriesListView({
+  const CategoriesListView({
     super.key
   });
 
@@ -25,7 +25,7 @@ class CategoriesListView extends StatelessWidget {
       child: ListView.builder(
         itemCount: categories.length,
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => CategoryCard(catImage: categories[index].cateoryImage, catName: categories[index].categoryName,),
+        itemBuilder: (context, index) => CategoryCard(category: categories[index]),
       ),
     );
   }
