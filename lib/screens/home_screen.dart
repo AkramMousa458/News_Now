@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_now/constants.dart';
 import 'package:news_now/widgets/categories_list_view.dart';
-import 'package:news_now/widgets/category_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: const CategoriesListView(),
+      body: CategoriesListView(),
     );
   }
 }

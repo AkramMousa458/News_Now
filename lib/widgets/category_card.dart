@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:news_now/constants.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({super.key});
+
+  final String catImage, catName;
+
+  const CategoryCard({super.key, required this.catImage, required this.catName});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +22,14 @@ class CategoryCard extends StatelessWidget {
               color: Color.fromARGB(192, 0, 0, 0),
             )
           ],
-          image: const DecorationImage(
-              image: AssetImage('assets/technology.jpeg'), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage(catImage), fit: BoxFit.cover),
           color: kmainColor,
           borderRadius: BorderRadius.circular(10)),
-      child: const Center(
+      child: Center(
           child: Text(
-        'Technology',
-        style: TextStyle(
+        catName,
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 16,
           fontWeight: FontWeight.bold,
