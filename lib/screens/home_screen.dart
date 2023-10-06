@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [ 
+          children: [
             Text(
               'News',
               style:

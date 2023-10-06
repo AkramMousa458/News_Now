@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_now/models/article_model.dart';
 
 class NewsTile extends StatelessWidget {
-  const NewsTile({super.key});
+  const NewsTile({super.key, required this.article});
+
+  final ArticleModel article;
 
   @override
   Widget build(BuildContext context) {
@@ -15,51 +18,66 @@ class NewsTile extends StatelessWidget {
               topRight: Radius.circular(8),
             ),
             child: Image.network(
-              'https://media.istockphoto.com/id/1369150014/vector/breaking-news-with-world-map-background-vector.jpg?s=1024x1024&w=is&k=20&c=blBt3PJbOSEZF5_zB5YgKYeq9Zx_RMOLntX_nI3lliQ=',
-              // 'assets/general.avif',
+              article.image ??
+                  'https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_01/2705191/nbc-social-default.png',
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'This is the head news title here',
-            maxLines: 2,
-            // textAlign: TextAlign.right,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.black87,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              article.title ?? 'Title Error',
+              maxLines: 2,
+              // textAlign: TextAlign.right,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           const SizedBox(height: 10),
-          const Row(
-            children: [
-              Text(
-                'This is the subtitle news here',
-                maxLines: 2,
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+          article.subTitle == null
+              ? const SizedBox(height: 10)
+              : Text(
+                  article.subTitle!,
+                  maxLines: 2,
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              Expanded(child: SizedBox()),
-              Text(
-                '2023-10-4',
-                maxLines: 1,
-                textAlign: TextAlign.end,
-                overflow: TextOverflow.visible,
-                style: TextStyle(
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Icon(
+                  Icons.date_range_rounded,
+                  size: 16,
                   color: Colors.grey,
-                  fontSize: 10,
                 ),
-              )
-            ],
+                const SizedBox(width: 3),
+                Text(
+                  article.date?.substring(0, 10) ?? '2023',
+                  maxLines: 1,
+                  // textAlign: TextAlign.end,
+                  overflow: TextOverflow.visible,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10,
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),
