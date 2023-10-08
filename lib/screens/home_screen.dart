@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:news_now/constants.dart';
 import 'package:news_now/widgets/categories_list_view.dart';
-import 'package:news_now/widgets/news_list_view.dart';
+import 'package:news_now/widgets/news_list_view_builder.dart';
 import 'package:news_now/widgets/search_tile.dart';
 
 String dropDownValue = 'assets/flags/us.png';
+// String dropDownValue = 'US';
+bool isNotChanged = true;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,13 +16,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  bool isChanged = false;
-  
-
   @override
   Widget build(BuildContext context) {
-    print(dropDownValue.substring(13,15));
+    print(dropDownValue.substring(13, 15));
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -54,17 +52,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(8),
                   iconSize: 22,
                   items: <String>[
+                    
                     'assets/flags/us.png',
                     'assets/flags/ar.png',
                     'assets/flags/fr.png',
                     'assets/flags/eg.png',
                     'assets/flags/sa.png',
-                    'assets/flags/ae.png',
+                    'assets/flags/ae.png'
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10, right: 6),
+                        // child: Text(
+                        //   value,
+                        //   style: const TextStyle(fontSize: 22),
+                        // ),
                         child: Image.asset(
                           value,
                           height: 18,
@@ -75,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onChanged: (String? newValue) {
                     setState(() {
                       dropDownValue = newValue!;
-                      isChanged = true;
+                      isNotChanged = false;
                     });
                   }),
             )
@@ -88,15 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
           slivers: [
             const SliverToBoxAdapter(child: SearchTile()),
             const SliverToBoxAdapter(child: CategoriesListView()),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
-            !isChanged ? 
-            const NewsListView(country: 'us')
-            :
-            const NewsListView(country: 'eg'),
+            NewsListViewBuilder(country: dropDownValue.substring(13,15))
           ],
         ),
       ),

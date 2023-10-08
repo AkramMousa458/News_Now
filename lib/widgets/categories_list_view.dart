@@ -9,12 +9,12 @@ class CategoriesListView extends StatelessWidget {
     CategoryModel(
         cateoryImage: 'assets/entertainment.jpeg',
         categoryName: 'Entertaiment'),
-    CategoryModel(cateoryImage: 'assets/general.avif', categoryName: 'General'),
     CategoryModel(cateoryImage: 'assets/health.webp', categoryName: 'Health'),
-    CategoryModel(cateoryImage: 'assets/science.avif', categoryName: 'Science'),
-    CategoryModel(cateoryImage: 'assets/sports.avif', categoryName: 'Sports'),
+    CategoryModel(cateoryImage: 'assets/science.png', categoryName: 'Science'),
+    CategoryModel(cateoryImage: 'assets/sports.png', categoryName: 'Sports'),
     CategoryModel(
-        cateoryImage: 'assets/technology.jpeg', categoryName: 'Technology')
+        cateoryImage: 'assets/technology.jpeg', categoryName: 'Technology'),
+    CategoryModel(cateoryImage: 'assets/general.png', categoryName: 'General'),
   ];
 
   const CategoriesListView({super.key});

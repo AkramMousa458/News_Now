@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_now/constants.dart';
 import 'package:news_now/models/article_model.dart';
 
 class NewsTile extends StatelessWidget {
@@ -27,7 +28,7 @@ class NewsTile extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               article.title ?? 'Title Error',
               maxLines: 2,
@@ -42,23 +43,26 @@ class NewsTile extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           article.subTitle == null
-              ? const SizedBox(height: 10)
-              : Text(
-                  article.subTitle!,
-                  maxLines: 2,
-                  textAlign: TextAlign.start,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+              ? const SizedBox(height: 0)
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    article.subTitle!,
+                    maxLines: 2,
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Icon(
                   Icons.date_range_rounded,
@@ -69,7 +73,6 @@ class NewsTile extends StatelessWidget {
                 Text(
                   article.date?.substring(0, 10) ?? '2023',
                   maxLines: 1,
-                  // textAlign: TextAlign.end,
                   overflow: TextOverflow.visible,
                   style: const TextStyle(
                     color: Colors.grey,
@@ -78,7 +81,7 @@ class NewsTile extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
