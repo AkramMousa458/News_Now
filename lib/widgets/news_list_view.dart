@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:news_now/constants.dart';
 import 'package:news_now/models/article_model.dart';
 import 'package:news_now/services/news_service.dart';
 import 'package:news_now/widgets/news_tile.dart';
-import 'package:news_now/widgets/shimmer_container.dart';
 import 'package:news_now/widgets/shimmer_tile.dart';
-import 'package:shimmer/shimmer.dart';
 
 class NewsListView extends StatefulWidget {
   const NewsListView({
-    super.key,
+    super.key, required this.country,
   });
+
+  final String country;
 
   @override
   State<NewsListView> createState() => _NewsListViewState();
@@ -28,7 +27,7 @@ class _NewsListViewState extends State<NewsListView> {
   }
 
   Future<void> getNews() async {
-    newsList = await NewsService().getNews(category: 'general');
+    newsList = await NewsService().getNews(category: 'general', country: widget.country);
     setState(() {
       isLoading = false;
     });
@@ -36,7 +35,7 @@ class _NewsListViewState extends State<NewsListView> {
 
   @override
   Widget build(BuildContext context) {
-    return !isLoading
+    return isLoading
         ? SliverList(
             delegate:
                 SliverChildBuilderDelegate(childCount: 10, (context, index) {
