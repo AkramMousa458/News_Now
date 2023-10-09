@@ -4,9 +4,8 @@ import 'package:news_now/widgets/categories_list_view.dart';
 import 'package:news_now/widgets/news_list_view_builder.dart';
 import 'package:news_now/widgets/search_tile.dart';
 
-String dropDownValue = 'assets/flags/us.png';
+String dropDownValue = 'assets/flags/eg.png';
 // String dropDownValue = 'US';
-bool isNotChanged = true;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    print(dropDownValue.substring(13, 15));
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -52,11 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(8),
                   iconSize: 22,
                   items: <String>[
-                    
+                    'assets/flags/eg.png',
                     'assets/flags/us.png',
                     'assets/flags/ar.png',
                     'assets/flags/fr.png',
-                    'assets/flags/eg.png',
                     'assets/flags/sa.png',
                     'assets/flags/ae.png'
                   ].map<DropdownMenuItem<String>>((String value) {
@@ -78,7 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   onChanged: (String? newValue) {
                     setState(() {
                       dropDownValue = newValue!;
-                      isNotChanged = false;
                     });
                   }),
             )
@@ -93,9 +89,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(child: SearchTile()),
-            const SliverToBoxAdapter(child: CategoriesListView()),
+            SliverToBoxAdapter(
+                child: CategoriesListView(
+                    country: dropDownValue.substring(13, 15))),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
-            NewsListViewBuilder(country: dropDownValue.substring(13,15))
+            NewsListViewBuilder(
+              country: dropDownValue.substring(13, 15),
+              category: 'general',
+            )
           ],
         ),
       ),
