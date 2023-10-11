@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_now/models/article_model.dart';
 import 'package:news_now/screens/home_screen.dart';
-import 'package:news_now/widgets/web_view_widget.dart';
+import 'package:news_now/screens/web_view_screen.dart';
 
 class NewsTile extends StatelessWidget {
   NewsTile({super.key, required this.article});
@@ -15,9 +15,10 @@ class NewsTile extends StatelessWidget {
       padding: const EdgeInsets.only(top: 0),
       child: GestureDetector(
         onTap: () {
-          // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          //   return WebViewScreen();
-          // }));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return WebViewScreen(webUrl: article.webUrl ?? 'http://www.akramwithdiap.com');
+          }));
+          // print('clicked');
         },
         child: Column(
           children: [

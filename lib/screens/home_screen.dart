@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news_now/constants.dart';
+import 'package:news_now/screens/search_screen.dart';
 import 'package:news_now/widgets/categories_list_view.dart';
 import 'package:news_now/widgets/news_list_view_builder.dart';
-import 'package:news_now/widgets/search_tile.dart';
 
+String keyWord = '';
 String dropDownValue = 'assets/flags/eg.png';
-// String dropDownValue = 'US';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,46 +37,58 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DropdownButton<String>(
-                  value: dropDownValue,
-                  icon: const Icon(Icons.language_rounded),
-                  style: const TextStyle(color: kmainColor),
-                  underline: Container(
-                    height: 0,
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const SearchScreen();
+                    }));
+                  },
+                  child: const Icon(
+                    Icons.search_rounded,
+                    color: Colors.black,
                   ),
-                  padding: const EdgeInsets.all(4),
-                  borderRadius: BorderRadius.circular(8),
-                  iconSize: 22,
-                  items: <String>[
-                    'assets/flags/eg.png',
-                    'assets/flags/us.png',
-                    'assets/flags/ar.png',
-                    'assets/flags/fr.png',
-                    'assets/flags/sa.png',
-                    'assets/flags/ae.png'
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 6),
-                        // child: Text(
-                        //   value,
-                        //   style: const TextStyle(fontSize: 22),
-                        // ),
-                        child: Image.asset(
-                          value,
-                          height: 18,
-                        ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                      value: dropDownValue,
+                      icon: const Icon(Icons.language_rounded),
+                      style: const TextStyle(color: kmainColor),
+                      underline: Container(
+                        height: 0,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropDownValue = newValue!;
-                    });
-                  }),
+                      padding: const EdgeInsets.all(4),
+                      borderRadius: BorderRadius.circular(8),
+                      iconSize: 22,
+                      items: <String>[
+                        'assets/flags/eg.png',
+                        'assets/flags/us.png',
+                        'assets/flags/ar.png',
+                        'assets/flags/fr.png',
+                        'assets/flags/sa.png',
+                        'assets/flags/ae.png'
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 6),
+                            child: Image.asset(
+                              value,
+                              height: 18,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropDownValue = newValue!;
+                        });
+                      }),
+                )
+              ],
             )
           ],
         ),
@@ -88,10 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(child: SearchTile()),
             SliverToBoxAdapter(
-                child: CategoriesListView(
-                    country: dropDownValue.substring(13, 15))),
+              child: CategoriesListView(
+                country: dropDownValue.substring(13, 15),
+              ),
+            ),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
             NewsListViewBuilder(
               country: dropDownValue.substring(13, 15),
