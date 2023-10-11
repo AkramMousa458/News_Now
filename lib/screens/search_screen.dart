@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:news_now/constants.dart';
 import 'package:news_now/widgets/search_tile.dart';
 
 class SearchScreen extends StatelessWidget {
